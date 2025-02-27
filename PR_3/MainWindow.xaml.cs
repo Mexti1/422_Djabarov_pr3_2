@@ -18,6 +18,12 @@ namespace PR_3
                 int months = int.Parse(MonthsTextBox.Text);
                 double rate = double.Parse(RateTextBox.Text) / 100;
 
+                if (amount < 0 || months < 0 || rate < 0)
+                {
+                    MessageBox.Show("Ошибка: Введены отрицательные значения. Пожалуйста, введите положительные числа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 double result;
 
                 if (SimpleInterestRadioButton.IsChecked == true)
@@ -31,9 +37,13 @@ namespace PR_3
 
                 ResultLabel.Content = $"Доход по вкладу = {result:F2}";
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("Ошибка: Некорректный ввод. Пожалуйста, введите числа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка ввода данных: " + ex.Message);
+                MessageBox.Show("Ошибка: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
