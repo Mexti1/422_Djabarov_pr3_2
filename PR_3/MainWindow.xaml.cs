@@ -18,14 +18,12 @@ namespace PR_3
                 int months = int.Parse(MonthsTextBox.Text);
                 double rate = double.Parse(RateTextBox.Text) / 100;
 
-                // Проверка на отрицательные значения
                 if (amount < 0 || months < 0 || rate < 0)
                 {
                     MessageBox.Show("Ошибка: Введены отрицательные значения. Пожалуйста, введите положительные числа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                // Проверка: выбрана ли схема начисления процентов
                 if (SimpleInterestRadioButton.IsChecked == false && CompoundInterestRadioButton.IsChecked == false)
                 {
                     MessageBox.Show("Ошибка: Выберите схему начисления процентов.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -38,7 +36,7 @@ namespace PR_3
                 {
                     result = amount + (amount * rate * months / 12);
                 }
-                else // CompoundInterestRadioButton.IsChecked == true
+                else
                 {
                     result = amount * Math.Pow(1 + rate / 12, months);
                 }
